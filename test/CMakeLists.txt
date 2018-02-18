@@ -1,10 +1,12 @@
 find_package(Boost REQUIRED COMPONENTS unit_test_framework)
 
+set(REQUIRED_LIBS stringlib)
+
 function(add_boost_test SOURCE_FILE_NAME)
     get_filename_component(TEST_EXECUTABLE_NAME ${SOURCE_FILE_NAME} NAME_WE)
 
     add_executable(${TEST_EXECUTABLE_NAME} ${SOURCE_FILE_NAME})
-    target_link_libraries(${TEST_EXECUTABLE_NAME} ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY})
+    target_link_libraries(${TEST_EXECUTABLE_NAME} ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY} ${REQUIRED_LIBS})
 
     file(READ "${SOURCE_FILE_NAME}" SOURCE_FILE_CONTENTS)
     string(REGEX MATCHALL "BOOST_AUTO_TEST_CASE\\( *([A-Za-z_0-9]+) *\\)"
