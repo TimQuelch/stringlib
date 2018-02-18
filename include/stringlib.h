@@ -65,6 +65,6 @@ namespace string {
     /// \param delim the substring to split str around
     /// \returns the split string
     std::vector<std::string> split(std::string_view str, std::string_view delim);
-}
+} // namespace string
 
 #endif
