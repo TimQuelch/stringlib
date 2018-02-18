@@ -1,5 +1,8 @@
 /// \author Tim Quelch
 
+#ifndef STRINGLIB_H
+#define STRINGLIB_H
+
 #include <string>
 #include <string_view>
 #include <vector>
@@ -63,3 +66,5 @@ namespace string {
     /// \returns the split string
     std::vector<std::string> split(std::string_view str, std::string_view delim);
 }
+
+#endif
