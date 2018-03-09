@@ -1,0 +1,12 @@
+get_filename_component(stringlib_CMAKE_DIR "${CMAKE_CURRENT_LIST_FILE}" PATH)
+
+list(APPEND CMAKE_MODULE_PATH ${stringlib_CMAKE_DIR})
+
+# dependencies here
+list(REMOVE_AT CMAKE_MODULE_PATH -1)
+
+if(NOT TARGET stringlib::stringlib)
+    include("${stringlib_CMAKE_DIR}/stringlibTargets.cmake")
+endif()
+
+set(stringlib_LIBRARIES stringlib::stringlib)
