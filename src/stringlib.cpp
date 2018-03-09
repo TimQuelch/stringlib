@@ -10,7 +10,7 @@ namespace string {
         std::string transformString(std::string_view str, F func) {
             std::string result;
             result.reserve(str.size());
-            std::transform(str.begin(), str.end(), std::back_inserter(result), func);
+            std::transform(str.cbegin(), str.cend(), std::back_inserter(result), func);
             return result;
         }
     } // namespace detail
@@ -23,7 +23,13 @@ namespace string {
         return detail::transformString(str, [](unsigned char c) { return std::tolower(c); });
     }
 
-    std::string trimWhitespace(std::string_view str) { return std::string{str}; }
+    std::string trimWhitespace(std::string_view str) {
+        auto beg = std::find_if(
+            str.cbegin(), str.cend(), [](unsigned char c) { return !std::isspace(c); });
+        auto end = std::find_if(
+            str.crbegin(), str.crend(), [](unsigned char c) { return !std::isspace(c); });
+        return std::string{beg, end.base()};
+    }
 
     int compare(std::string_view one, std::string_view two) { return one.size() + two.size(); }
 
