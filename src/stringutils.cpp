@@ -44,8 +44,8 @@ namespace stringutils {
 
     bool contains(std::string_view str, std::string_view match) {
         auto res = boost::algorithm::boyer_moore_search(
-            str.begin(), str.end(), match.begin(), match.end());
-        return !(res.first == str.end() && res.second == str.end());
+            str.cbegin(), str.cend(), match.cbegin(), match.cend());
+        return !(res.first == str.cend() && res.second == str.cend());
     }
 
     bool startsWith(std::string_view str, std::string_view prefix) {
