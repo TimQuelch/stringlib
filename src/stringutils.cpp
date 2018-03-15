@@ -52,28 +52,14 @@ namespace stringutils {
         if (str.size() < prefix.size()) {
             return false;
         }
-
-        auto current = str.cbegin();
-        for (const auto check : prefix) {
-            if (check != *(current++)) {
-                return false;
-            }
-        }
-        return true;
+        return std::string_view{str.cbegin(), prefix.size()} == prefix;
     }
 
     bool endsWith(std::string_view str, std::string_view suffix) {
         if (str.size() < suffix.size()) {
             return false;
         }
-
-        auto current = str.cend() - suffix.size();
-        for (const auto check : suffix) {
-            if (check != *(current++)) {
-                return false;
-            }
-        }
-        return true;
+        return std::string_view{str.cend() - suffix.size(), suffix.size()} == suffix;
     }
 
     std::vector<std::string> split(std::string_view str, std::string_view delim) {
