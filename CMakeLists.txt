@@ -6,6 +6,7 @@ add_library(stringutils src/stringutils.cpp)
 add_library(stringutils::stringutils ALIAS stringutils)
 
 # Configure library target
+find_package(Boost 1.62 REQUIRED)
 target_include_directories(
     stringutils
     PUBLIC
@@ -13,6 +14,7 @@ target_include_directories(
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>)
 target_compile_features(stringutils PUBLIC cxx_std_17)
 target_compile_options(stringutils PRIVATE -Wall -Werror -Wextra -Wpedantic)
+target_link_libraries(stringutils PRIVATE Boost::boost)
 
 # Add tests
 enable_testing()

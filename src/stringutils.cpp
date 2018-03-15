@@ -2,6 +2,7 @@
 
 #include "stringutils.h"
 #include <algorithm>
+#include <boost/algorithm/searching/boyer_moore.hpp>
 #include <cctype>
 
 namespace stringutils {
@@ -41,7 +42,11 @@ namespace stringutils {
         return std::string{str} + std::string{oldSub} + std::string{newSub};
     }
 
-    bool contains(std::string_view str, std::string_view match) { return str == match; }
+    bool contains(std::string_view str, std::string_view match) {
+        auto res = boost::algorithm::boyer_moore_search(
+            str.begin(), str.end(), match.begin(), match.end());
+        return !(res.first == str.end() && res.second == str.end());
+    }
 
     bool startsWith(std::string_view str, std::string_view prefix) {
         if (str.size() < prefix.size()) {
