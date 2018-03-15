@@ -43,9 +43,33 @@ namespace stringutils {
 
     bool contains(std::string_view str, std::string_view match) { return str == match; }
 
-    bool startsWith(std::string_view str, std::string_view prefix) { return str == prefix; }
+    bool startsWith(std::string_view str, std::string_view prefix) {
+        if (str.size() < prefix.size()) {
+            return false;
+        }
 
-    bool endsWith(std::string_view str, std::string_view suffix) { return str == suffix; }
+        auto current = str.cbegin();
+        for (const auto check : prefix) {
+            if (check != *(current++)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    bool endsWith(std::string_view str, std::string_view suffix) {
+        if (str.size() < suffix.size()) {
+            return false;
+        }
+
+        auto current = str.cend() - suffix.size();
+        for (const auto check : suffix) {
+            if (check != *(current++)) {
+                return false;
+            }
+        }
+        return true;
+    }
 
     std::vector<std::string> split(std::string_view str, std::string_view delim) {
         return {std::string{str}, std::string{delim}};
