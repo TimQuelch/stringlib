@@ -103,3 +103,20 @@ BOOST_AUTO_TEST_CASE(endsWith) {
     BOOST_TEST(stringutils::endsWith(string, "bcd") == false);
     BOOST_TEST(stringutils::endsWith(string, "") == true);
 }
+
+BOOST_AUTO_TEST_CASE(split) {
+    auto csv = std::string{"ab,abc,test,with spaces string,,lastone"};
+    auto csvRes =
+        std::vector<std::string>{"ab", "abc", "test", "with spaces string", "", "lastone"};
+    auto spaces = std::string{"ab abc test with spaces string   lastone"};
+    auto spacesRes = std::vector<std::string>{
+        "ab", "abc", "test", "with", "spaces", "string", "", "", "lastone"};
+    auto string = std::string{"akslabcadshdcpabcwepivhaabcdlknaabcihcs"};
+    auto stringRes = std::vector<std::string>{"aksl", "adshdcp", "wepivha", "dlkna", "ihcs"};
+
+    BOOST_TEST(stringutils::split(csv, ",") == csvRes);
+    BOOST_TEST(stringutils::split(spaces, " ") == spacesRes);
+    BOOST_TEST(stringutils::split(string, "abc") == stringRes);
+    BOOST_TEST(stringutils::split(string, ",") == std::vector<std::string>{string});
+    BOOST_TEST(stringutils::split(string, "    ") == std::vector<std::string>{string});
+}
