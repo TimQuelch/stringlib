@@ -1,10 +1,10 @@
 /// \author Tim Quelch
 
-#include "stringlib.h"
+#include "stringutils.h"
 #include <algorithm>
 #include <cctype>
 
-namespace string {
+namespace stringutils {
     namespace detail {
         template <typename F>
         std::string transformString(std::string_view str, F func) {
@@ -50,4 +50,4 @@ namespace string {
     std::vector<std::string> split(std::string_view str, std::string_view delim) {
         return {std::string{str}, std::string{delim}};
     }
-} // namespace string
+} // namespace stringutils

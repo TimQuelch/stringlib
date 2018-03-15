@@ -1,6 +1,6 @@
 find_package(Boost REQUIRED COMPONENTS unit_test_framework)
 
-set(REQUIRED_LIBS stringlib)
+set(REQUIRED_LIBS stringutils)
 
 function(add_boost_test SOURCE_FILE_NAME)
     get_filename_component(TEST_EXECUTABLE_NAME ${SOURCE_FILE_NAME} NAME_WE)
@@ -21,4 +21,4 @@ function(add_boost_test SOURCE_FILE_NAME)
     endforeach()
 endfunction()
 
-add_boost_test(stringlib_test.cpp)
+add_boost_test(stringutils-test.cpp)

@@ -1,13 +1,13 @@
 /// \author Tim Quelch
 
-#ifndef STRINGLIB_H
-#define STRINGLIB_H
+#ifndef STRINGUTILS_H
+#define STRINGUTILS_H
 
 #include <string>
 #include <string_view>
 #include <vector>
 
-namespace string {
+namespace stringutils {
     /// Returns a string in all upper case
     /// \param str a string
     /// \returns str converted to upper case
@@ -65,6 +65,6 @@ namespace string {
     /// \param delim the substring to split str around
     /// \returns the split string
     std::vector<std::string> split(std::string_view str, std::string_view delim);
-} // namespace string
+} // namespace stringutils
 
 #endif
