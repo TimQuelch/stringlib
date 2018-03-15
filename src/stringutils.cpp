@@ -77,6 +77,19 @@ namespace stringutils {
     }
 
     std::vector<std::string> split(std::string_view str, std::string_view delim) {
-        return {std::string{str}, std::string{delim}};
+        std::vector<std::string> result;
+
+        const auto bm = boost::algorithm::boyer_moore{delim.cbegin(), delim.cend()};
+
+        auto current = str.cbegin();
+        const auto end = str.cend();
+
+        while (current < end) {
+            auto match = bm(current, end);
+            result.push_back({current, match.first});
+            current = match.second;
+        }
+
+        return result;
     }
 } // namespace stringutils
