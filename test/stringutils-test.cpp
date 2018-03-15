@@ -85,7 +85,7 @@ BOOST_AUTO_TEST_CASE(startsWith) {
     BOOST_TEST(stringutils::startsWith(string, "ersf") == false);
     BOOST_TEST(stringutils::startsWith(string, "efg") == false);
     BOOST_TEST(stringutils::startsWith(string, "bcd") == false);
-    BOOST_TEST(stringutils::contains(string, "") == true);
+    BOOST_TEST(stringutils::startsWith(string, "") == true);
 }
 
 BOOST_AUTO_TEST_CASE(endsWith) {
@@ -93,13 +93,13 @@ BOOST_AUTO_TEST_CASE(endsWith) {
     auto compare = std::string{"efg"};
     auto badCompare = std::string{"abc"};
 
-    BOOST_TEST(stringutils::startsWith(string, "g") == true);
-    BOOST_TEST(stringutils::startsWith(string, "defg") == true);
-    BOOST_TEST(stringutils::startsWith(string, string) == true);
-    BOOST_TEST(stringutils::startsWith(string, compare) == true);
-    BOOST_TEST(stringutils::startsWith(string, badCompare) == false);
-    BOOST_TEST(stringutils::startsWith(string, "ersf") == false);
-    BOOST_TEST(stringutils::startsWith(string, "abc") == false);
-    BOOST_TEST(stringutils::startsWith(string, "bcd") == false);
-    BOOST_TEST(stringutils::contains(string, "") == true);
+    BOOST_TEST(stringutils::endsWith(string, "g") == true);
+    BOOST_TEST(stringutils::endsWith(string, "defg") == true);
+    BOOST_TEST(stringutils::endsWith(string, string) == true);
+    BOOST_TEST(stringutils::endsWith(string, compare) == true);
+    BOOST_TEST(stringutils::endsWith(string, badCompare) == false);
+    BOOST_TEST(stringutils::endsWith(string, "ersf") == false);
+    BOOST_TEST(stringutils::endsWith(string, "abc") == false);
+    BOOST_TEST(stringutils::endsWith(string, "bcd") == false);
+    BOOST_TEST(stringutils::endsWith(string, "") == true);
 }
