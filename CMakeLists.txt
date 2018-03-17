@@ -13,7 +13,7 @@ target_include_directories(
     $<INSTALL_INTERFACE:include>
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>)
 target_compile_features(stringutils PUBLIC cxx_std_17)
-target_compile_options(stringutils PRIVATE -Wall -Werror -Wextra -Wpedantic)
+target_compile_options(stringutils PRIVATE -Wall -Wextra -Wpedantic)
 target_link_libraries(stringutils PRIVATE Boost::boost)
 
 # Add tests
