@@ -2,8 +2,8 @@
 
 #include "stringutils.h"
 #include <algorithm>
-#include <boost/algorithm/searching/boyer_moore.hpp>
 #include <cctype>
+#include <functional>
 
 namespace stringutils {
     namespace detail {
@@ -43,9 +43,11 @@ namespace stringutils {
     }
 
     bool contains(std::string_view str, std::string_view match) {
-        auto res = boost::algorithm::boyer_moore_search(
-            str.cbegin(), str.cend(), match.cbegin(), match.cend());
-        return !(res.first == str.cend() && res.second == str.cend());
+        const auto res =
+            std::search(str.cbegin(),
+                        str.cend(),
+                        std::boyer_moore_horspool_searcher(match.cbegin(), match.cend()));
+        return res != str.cend();
     }
 
     bool startsWith(std::string_view str, std::string_view prefix) {
@@ -65,15 +67,15 @@ namespace stringutils {
     std::vector<std::string> split(std::string_view str, std::string_view delim) {
         std::vector<std::string> result;
 
-        const auto bm = boost::algorithm::boyer_moore{delim.cbegin(), delim.cend()};
+        const auto searcher = std::boyer_moore_horspool_searcher(delim.cbegin(), delim.cend());
 
         auto current = str.cbegin();
         const auto end = str.cend();
 
         while (current < end) {
-            auto match = bm(current, end);
-            result.push_back({current, match.first});
-            current = match.second;
+            const auto match = std::search(current, str.cend(), searcher);
+            result.push_back({current, match});
+            current = match + delim.size();
         }
 
         return result;
